@@ -1,0 +1,33 @@
+[project]
+name = "tupa"
+version = "2.0.0"
+description = "TUPÃ: Electric field analyses for molecular simulations"
+authors = [
+    { name = "Marcelo D. Polêto", email = "mdpoleto@ufv.br" },
+    { name = "Justin A. Lemkul", email = "jalemkul@vt.edu" },
+    { name = "Michel Lacerda", email = "michel.lacerda@ufv.br" }
+]
+requires-python = ">=3.11"
+dependencies = [
+    "mdanalysis>=2.10.0",
+    "numpy>=2.4.6",
+    "rich>=15.0.0",
+    "typer>=0.27.2",
+]
+
+[project.urls]
+"Original repository" = "https://github.com/mdpoleto/tupa"
+"Publication" = "https://doi.org/10.1002/jcc.26873"
+
+[project.scripts]
+tupa = "tupa:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+    "ruff>=0.16.9",
+]
