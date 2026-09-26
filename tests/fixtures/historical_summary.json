@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "provenance": {
+    "kind": "recorded_observation",
+    "date": "2026-09-26",
+    "reference": "TUPA.py, tests/unit_test.psf, tests/unit_test.pdb, tests/config.conf",
+    "python": "3.14.7",
+    "numpy": "2.5.3",
+    "mdanalysis": "2.10.0",
+    "execution": "Temporary runpy launcher with fork and one worker",
+    "note": "Values transcribed from the initial audit; no legacy files are required to read this record."
+  },
+  "units": {"time": "ps", "field": "MV/cm"},
+  "columns": ["magnitude", "x", "y", "z"],
+  "frame_count": 10,
+  "times": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+  "field_at_every_frame": [14.399652, 10.182092, 10.182092, 0.0],
+  "mean": [14.399652, 10.182092, 10.182092, 0.0],
+  "standard_deviation": [0.0, 0.0, 0.0, 0.0],
+  "printed_decimal_places": 6,
+  "ddof": 0
+}

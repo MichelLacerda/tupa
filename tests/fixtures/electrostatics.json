@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "units": {
+    "positions": "angstrom",
+    "charges": "elementary_charge",
+    "field": "MV/cm"
+  },
+  "cases": [
+    {
+      "id": "positive_charge",
+      "positions": [[1.0, 0.0, 0.0]],
+      "charges": [1.0],
+      "probes": [[0.0, 0.0, 0.0]],
+      "expected_fields": [[-1439.965173376172, 0.0, 0.0]]
+    },
+    {
+      "id": "negative_charge",
+      "positions": [[1.0, 0.0, 0.0]],
+      "charges": [-1.0],
+      "probes": [[0.0, 0.0, 0.0]],
+      "expected_fields": [[1439.965173376172, 0.0, 0.0]]
+    },
+    {
+      "id": "symmetric_cancellation",
+      "positions": [[1.0, 0.0, 0.0], [-1.0, 0.0, 0.0]],
+      "charges": [1.0, 1.0],
+      "probes": [[0.0, 0.0, 0.0]],
+      "expected_fields": [[0.0, 0.0, 0.0]]
+    },
+    {
+      "id": "dipole_addition",
+      "positions": [[1.0, 0.0, 0.0], [-1.0, 0.0, 0.0]],
+      "charges": [1.0, -1.0],
+      "probes": [[0.0, 0.0, 0.0]],
+      "expected_fields": [[-2879.930346752344, 0.0, 0.0]]
+    },
+    {
+      "id": "inverse_square_distance",
+      "positions": [[2.0, 0.0, 0.0]],
+      "charges": [1.0],
+      "probes": [[0.0, 0.0, 0.0]],
+      "expected_fields": [[-359.991293344043, 0.0, 0.0]]
+    },
+    {
+      "id": "zero_charge",
+      "positions": [[1.0, 2.0, 3.0]],
+      "charges": [0.0],
+      "probes": [[0.0, 0.0, 0.0]],
+      "expected_fields": [[0.0, 0.0, 0.0]]
+    },
+    {
+      "id": "charge_rounding_down",
+      "positions": [[1.0, 0.0, 0.0]],
+      "charges": [0.1234564],
+      "probes": [[0.0, 0.0, 0.0]],
+      "expected_fields": [[-177.7723404443287, 0.0, 0.0]]
+    },
+    {
+      "id": "multiple_probes",
+      "positions": [[0.0, 0.0, 0.0]],
+      "charges": [1.0],
+      "probes": [[1.0, 0.0, 0.0], [0.0, 2.0, 0.0], [0.0, 0.0, -1.0]],
+      "expected_fields": [
+        [1439.965173376172, 0.0, 0.0],
+        [0.0, 359.991293344043, 0.0],
+        [0.0, 0.0, -1439.965173376172]
+      ]
+    },
+    {
+      "id": "diagonal_field",
+      "positions": [[0.0, 0.0, 0.0]],
+      "charges": [2.0],
+      "probes": [[10.0, 10.0, 0.0]],
+      "expected_fields": [[10.182091387667539, 10.182091387667539, 0.0]]
+    }
+  ]
+}

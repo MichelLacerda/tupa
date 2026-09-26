@@ -18,9 +18,15 @@ uv build
 ```
 
 `pyproject.toml` contains the tool configuration. The new test suite currently
-lives in `tests/integration`; add new test directories to `testpaths`, Ruff's
-file selection, and the sdist configuration when creating them.
-The tests check installation and imports; they do not yet validate scientific results.
+lives in `tests/integration` and `tests/regression`, with shared support in
+`tests/conftest.py` and independent data in `tests/fixtures`. Add new test
+directories to `testpaths`, Ruff's file selection, and the sdist configuration
+when creating them.
+
+The tests check installation, imports, and scientific reference data. The
+[reference guide](tests/fixtures/README.md) documents analytical cases,
+historical observations, units, and tolerances. These are foundations for
+future kernel tests; no production field calculation is implemented yet.
 
 Pydantic 2 will validate TOML input read with `tomllib`. Internal data will use
 dataclasses and NumPy/CuPy arrays, with explicit scientific validation.

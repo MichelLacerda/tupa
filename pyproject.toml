@@ -40,6 +40,9 @@ packages = ["src/tupa"]
 only-include = [
     "src/tupa",
     "tests/integration",
+    "tests/regression",
+    "tests/fixtures",
+    "tests/conftest.py",
     "pyproject.toml",
     "uv.lock",
     "LICENSE",
@@ -48,14 +51,20 @@ only-include = [
 
 [tool.pytest]
 minversion = "9.0"
-testpaths = ["tests/integration"]
+testpaths = ["tests/integration", "tests/regression"]
 addopts = ["--import-mode=importlib", "--strict-config", "--strict-markers", "-ra"]
 
 [tool.ruff]
 target-version = "py313"
 line-length = 79
 src = ["src"]
-include = ["pyproject.toml", "src/**/*.py", "tests/integration/**/*.py"]
+include = [
+    "pyproject.toml",
+    "src/**/*.py",
+    "tests/conftest.py",
+    "tests/integration/**/*.py",
+    "tests/regression/**/*.py",
+]
 
 [tool.ruff.lint]
 select = ["E4", "E7", "E9", "F", "I", "UP", "B"]
