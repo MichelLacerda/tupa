@@ -1,0 +1,25 @@
+# Template only: supply your own molecular files and selections.
+schema_version = 2
+
+[system]
+topology = "system.psf"
+trajectory = "trajectory.dcd"
+
+[analysis]
+mode = "ATOM"
+
+[environment]
+selection = "protein"
+
+[probe]
+selection = "resname LIG and name C1"
+
+[pbc]
+policy = "legacy"
+
+[compute]
+backend = "auto"
+precision = "double"
+
+[output]
+directory = "results"

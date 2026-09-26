@@ -9,6 +9,7 @@ authors = [
 ]
 requires-python = ">=3.13"
 dependencies = [
+    "jinja2>=3.1.6",
     "mdanalysis>=2.10.0",
     "numpy>=2.4.6",
     "pydantic>=2,<3",
@@ -40,6 +41,7 @@ packages = ["src/tupa"]
 only-include = [
     "src/tupa",
     "tests/integration",
+    "tests/unit",
     "tests/regression",
     "tests/fixtures",
     "tests/conftest.py",
@@ -47,11 +49,12 @@ only-include = [
     "uv.lock",
     "LICENSE",
     "DEVELOPMENT.md",
+    "docs",
 ]
 
 [tool.pytest]
 minversion = "9.0"
-testpaths = ["tests/integration", "tests/regression"]
+testpaths = ["tests/unit", "tests/integration", "tests/regression"]
 addopts = ["--import-mode=importlib", "--strict-config", "--strict-markers", "-ra"]
 
 [tool.ruff]
@@ -62,6 +65,7 @@ include = [
     "pyproject.toml",
     "src/**/*.py",
     "tests/conftest.py",
+    "tests/unit/**/*.py",
     "tests/integration/**/*.py",
     "tests/regression/**/*.py",
 ]

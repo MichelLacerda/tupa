@@ -39,5 +39,6 @@ jobs:
         run: |
           "$GITHUB_WORKSPACE/.venv/bin/python" -I -m pytest \
             -c "$GITHUB_WORKSPACE/pyproject.toml" \
+            "$GITHUB_WORKSPACE/tests/unit" \
             "$GITHUB_WORKSPACE/tests/integration" \
             "$GITHUB_WORKSPACE/tests/regression"

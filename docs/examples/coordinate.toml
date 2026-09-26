@@ -1,0 +1,27 @@
+# Template only: supply your own molecular files and selections.
+schema_version = 2
+
+[system]
+topology = "system.psf"
+trajectory = "trajectory.dcd"
+
+[analysis]
+mode = "COORDINATE"
+
+[environment]
+selection = "protein"
+
+[probe]
+position = [0.0, 0.0, 0.0]
+remove_self = true
+remove_radius = 1.0
+
+[pbc]
+policy = "legacy"
+
+[compute]
+backend = "auto"
+precision = "double"
+
+[output]
+directory = "results"
