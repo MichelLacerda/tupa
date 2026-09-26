@@ -34,8 +34,8 @@ Internal data will use
 dataclasses and NumPy/CuPy arrays, with explicit scientific validation.
 The default installation uses the CPU and does not depend on CuPy.
 
-Jinja2 renders the packaged configuration template used by `tupa config
-template`. It uses `StrictUndefined`; TOML values in the current template are
+Jinja2 renders the packaged configuration template used by `tupa create`.
+It uses `StrictUndefined`; TOML values in the current template are
 fixed strings selected by an enum. Future project scaffolding and result
 reports should render from validated models and use escaping appropriate to
 their output format. See the [Jinja API](https://jinja.palletsprojects.com/en/stable/api/).

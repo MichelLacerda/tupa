@@ -15,12 +15,13 @@ from tupa.config import TupaConfig
 
 
 @pytest.mark.parametrize("mode", ["ATOM", "BOND", "COORDINATE", "LIST"])
-def test_template_modes_and_existing_file(tmp_path: Path, mode: str) -> None:
-    target = tmp_path / "project with spaces.toml"
+def test_create_modes_and_existing_directory(
+    tmp_path: Path, mode: str
+) -> None:
+    project = tmp_path / "project with spaces"
+    target = project / "config.toml"
     runner = CliRunner()
-    created = runner.invoke(
-        app, ["config", "template", str(target), "--mode", mode]
-    )
+    created = runner.invoke(app, ["create", str(project), "--mode", mode])
     assert created.exit_code == 0, created.output
     assert (
         TupaConfig.model_validate(
@@ -29,14 +30,17 @@ def test_template_modes_and_existing_file(tmp_path: Path, mode: str) -> None:
         == mode
     )
     original = target.read_bytes()
-    refused = runner.invoke(app, ["config", "template", str(target)])
+    refused = runner.invoke(app, ["create", str(project)])
     assert refused.exit_code == 2
     assert target.read_bytes() == original
-    replaced = runner.invoke(
-        app, ["config", "template", str(target), "--force"]
-    )
-    assert replaced.exit_code == 0
-    assert 'mode = "ATOM"' in target.read_text()
+
+
+def test_create_refuses_existing_empty_directory(tmp_path: Path) -> None:
+    project = tmp_path / "existing"
+    project.mkdir()
+    result = CliRunner().invoke(app, ["create", str(project)])
+    assert result.exit_code == 2
+    assert not list(project.iterdir())
 
 
 def test_help_and_errors_from_external_directory(tmp_path: Path) -> None:
@@ -51,7 +55,7 @@ def test_help_and_errors_from_external_directory(tmp_path: Path) -> None:
     assert help_result.returncode == 0
     assert all(
         name in help_result.stdout
-        for name in ("run", "validate", "info", "config")
+        for name in ("run", "validate", "info", "create")
     )
     missing = subprocess.run(
         [*command, "validate", "missing config.toml"],
@@ -66,28 +70,26 @@ def test_help_and_errors_from_external_directory(tmp_path: Path) -> None:
 
 
 def test_run_preflights_before_unavailable_message(tmp_path: Path) -> None:
-    target = tmp_path / "config.toml"
+    project = tmp_path / "project"
+    target = project / "config.toml"
     runner = CliRunner()
-    assert (
-        runner.invoke(app, ["config", "template", str(target)]).exit_code == 0
-    )
+    assert runner.invoke(app, ["create", str(project)]).exit_code == 0
     result = runner.invoke(app, ["run", str(target)])
     assert result.exit_code == 2
     assert "system.topology" in result.output
     assert "Scientific calculations are not available" not in result.output
-    assert not (tmp_path / "results").exists()
+    assert not (project / "results").exists()
 
 
-def test_template_to_pipe_and_quiet(tmp_path: Path) -> None:
+def test_create_to_pipe_and_quiet(tmp_path: Path) -> None:
     result = subprocess.run(
         [
             sys.executable,
             "-m",
             "tupa.cli",
             "--quiet",
-            "config",
-            "template",
-            "a b.toml",
+            "create",
+            "a b",
         ],
         cwd=tmp_path,
         capture_output=True,
@@ -96,7 +98,7 @@ def test_template_to_pipe_and_quiet(tmp_path: Path) -> None:
     )
     assert result.returncode == 0, result.stderr
     assert result.stdout == ""
-    assert (tmp_path / "a b.toml").is_file()
+    assert (tmp_path / "a b" / "config.toml").is_file()
 
 
 def molecular_files(tmp_path: Path) -> tuple[Path, Path]:

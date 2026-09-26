@@ -49,6 +49,4 @@ def main(
     )
 
 
-from . import config, info, run, validate  # noqa: E402, F401
-
-app.add_typer(config.app, name="config")
+from . import create, info, run, validate  # noqa: E402, F401

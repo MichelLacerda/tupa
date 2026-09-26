@@ -1,0 +1,16 @@
+{
+  "venvPath": ".",
+  "venv": ".venv",
+  "include": ["src", "tests"],
+  "typeCheckingMode": "standard",
+  "reportUnknownMemberType": "none",
+  "reportAssignmentType": "none",
+  "reportCallInDefaultInitializer": "none",
+  "reportPossiblyUnboundVariable": "none",
+  "executionEnvironments": [
+    {
+      "root": ".",
+      "extraPaths": ["src"]
+    }
+  ]
+}
