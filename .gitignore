@@ -58,5 +58,5 @@ dist/
 wheels/
 *.egg-info
 .venv
-pytest_cache/
+.pytest_cache/
 .ruff_cache/
