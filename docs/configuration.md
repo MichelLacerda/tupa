@@ -1,10 +1,27 @@
 # TOML configuration
 
 TUPÃ 2.0 uses `tomllib` to read TOML and Pydantic 2 to validate its structure.
-The Python configuration API is available; the CLI and scientific engine are
-not implemented yet. Parsing a configuration does not execute any calculation.
+The CLI and Python configuration API are available. The scientific engine is
+not implemented yet. Parsing or validating a configuration does not execute
+any calculation.
 
 ## Reading a configuration
+
+Generate a starting file, then replace its example paths and selections:
+
+```bash
+tupa config template project.toml --mode ATOM
+tupa validate project.toml
+tupa info system.psf trajectory.dcd
+```
+
+`tupa config template` also accepts BOND, COORDINATE, and LIST. It refuses to
+replace an existing file unless `--force` is given. `tupa validate` checks the
+configuration and first selected molecular frame without creating outputs.
+`tupa run` performs the same preflight, then exits with a clear unavailable
+message until the scientific engine is implemented. Global `--quiet` suppresses
+status output, `--no-color` disables color, and `-v` increases log detail.
+Configuration errors exit with code 2; an unavailable engine exits with code 3.
 
 ```python
 from tupa.config import ConfigurationError, load_config

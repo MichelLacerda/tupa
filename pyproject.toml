@@ -22,7 +22,7 @@ dependencies = [
 "Publication" = "https://doi.org/10.1002/jcc.26873"
 
 [project.scripts]
-tupa = "tupa:main"
+tupa = "tupa.cli.app:app"
 
 [build-system]
 requires = ["hatchling"]

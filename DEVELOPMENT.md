@@ -2,9 +2,8 @@
 
 Requires Python >=3.13 and uv. New code lives in `src/tupa`; legacy files
 serve only as references and are excluded from the distribution and new test suite.
-The CLI is still the initial scaffold. TOML configuration and molecular
-preflight validation are available through the Python API; CLI integration
-and scientific calculations will be implemented in subsequent tasks.
+The Typer CLI exposes configuration templates, molecular preflight, and input
+inspection. Scientific calculations will be implemented in a later task.
 
 Write all new files, documentation, comments, and user-facing messages in English.
 
@@ -35,13 +34,11 @@ Internal data will use
 dataclasses and NumPy/CuPy arrays, with explicit scientific validation.
 The default installation uses the CPU and does not depend on CuPy.
 
-Jinja2 is a runtime dependency for future project scaffolding and rendered
-result reports. Package templates with `tupa` when those commands are built,
-and render from validated configuration or result models. Prefer
-`StrictUndefined` so a missing template value raises an error. Set escaping
-for the output format: HTML reports need HTML escaping; generated TOML and
-scientific data files need format-aware serialization. No template command is
-available yet. See the [Jinja API](https://jinja.palletsprojects.com/en/stable/api/).
+Jinja2 renders the packaged configuration template used by `tupa config
+template`. It uses `StrictUndefined`; TOML values in the current template are
+fixed strings selected by an enum. Future project scaffolding and result
+reports should render from validated models and use escaping appropriate to
+their output format. See the [Jinja API](https://jinja.palletsprojects.com/en/stable/api/).
 
 ## Distribution and CI
 

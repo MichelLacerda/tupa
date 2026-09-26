@@ -1,0 +1,37 @@
+# Replace the example paths and selections before validating.
+schema_version = 2
+
+[system]
+topology = "system.psf"
+trajectory = "trajectory.dcd"
+
+[analysis]
+mode = "{{ mode }}"
+
+[environment]
+selection = "protein"
+
+[probe]
+{% if mode == "ATOM" %}
+selection = "resname LIG and name C1"
+{% elif mode == "BOND" %}
+atom1 = "resname LIG and name C1"
+atom2 = "resname LIG and name O1"
+{% elif mode == "COORDINATE" %}
+position = [0.0, 0.0, 0.0]
+remove_self = true
+remove_radius = 1.0
+{% elif mode == "LIST" %}
+coordinates_file = "probes.csv"
+remove_self = true
+remove_radius = 1.0
+{% endif %}
+[pbc]
+policy = "legacy"
+
+[compute]
+backend = "auto"
+precision = "double"
+
+[output]
+directory = "results"
