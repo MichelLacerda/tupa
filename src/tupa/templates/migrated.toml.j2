@@ -1,0 +1,48 @@
+schema_version = 2
+
+[system]
+topology = {{ config.system.topology|string|toml_string }}
+trajectory = {{ config.system.trajectory|string|toml_string }}
+
+[analysis]
+mode = {{ config.analysis.mode|toml_string }}
+
+[environment]
+selection = {{ config.environment.selection|toml_string }}
+
+[probe]
+{% if config.analysis.mode == "ATOM" %}
+selection = {{ config.probe.selection|toml_string }}
+{% elif config.analysis.mode == "BOND" %}
+atom1 = {{ config.probe.atom1|toml_string }}
+atom2 = {{ config.probe.atom2|toml_string }}
+{% elif config.analysis.mode == "COORDINATE" %}
+position = [{{ config.probe.position|join(", ") }}]
+{% else %}
+coordinates_file = {{ config.probe.coordinates_file|string|toml_string }}
+{% endif %}
+{% if config.analysis.mode in ("COORDINATE", "LIST") %}
+remove_self = {{ config.probe.remove_self|string|lower }}
+{% if config.probe.remove_radius is not none %}
+remove_radius = {{ config.probe.remove_radius }}
+{% endif %}
+{% endif %}
+{% if config.solvent.enabled %}
+
+[solvent]
+enabled = true
+selection = {{ config.solvent.selection|toml_string }}
+radius = {{ config.solvent.radius }}
+
+{% endif %}
+{% if config.pbc.override_box %}
+[pbc]
+override_box = true
+dimensions = [{{ config.pbc.dimensions|join(", ") }}]
+
+{% endif %}
+{% if "dt_ps" in config.trajectory.model_fields_set %}
+[trajectory]
+dt_ps = {{ config.trajectory.dt_ps }}
+
+{% endif %}

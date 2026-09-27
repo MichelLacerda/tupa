@@ -4,6 +4,8 @@ Requires Python >=3.13 and uv. New code lives in `src/tupa`; legacy files
 serve only as references and are excluded from the distribution and new test suite.
 The Typer CLI exposes configuration templates, molecular preflight, and input
 inspection. Scientific calculations will be implemented in a later task.
+`tupa migrate` converts historical `.conf` input into a new project directory;
+see the [migration guide](docs/migration.md). The original file is preserved.
 
 Write all new files, documentation, comments, and user-facing messages in English.
 

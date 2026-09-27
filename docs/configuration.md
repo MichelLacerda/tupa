@@ -24,6 +24,9 @@ message until the scientific engine is implemented. Global `--quiet` suppresses
 status output, `--no-color` disables color, and `-v` increases log detail.
 Configuration errors exit with code 2; an unavailable engine exits with code 3.
 
+To convert an existing `.conf` configuration into a new project, see the
+[migration guide](migration.md).
+
 ```python
 from tupa.config import ConfigurationError, load_config
 

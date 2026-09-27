@@ -49,4 +49,4 @@ def main(
     )
 
 
-from . import create, info, run, validate  # noqa: E402, F401
+from . import create, info, migrate, run, validate  # noqa: E402, F401
